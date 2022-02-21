@@ -1,0 +1,120 @@
+body {
+    background-color: rgb(66, 65, 65);
+}
+
+/* -- Currency Converter -- */
+.wrapper {
+    width: 370px;
+    padding: 30px;
+    border-radius: 15px;
+    border: 2px solid #007bff;
+    color: white;
+    background-color: rgb(48, 47, 47);
+}
+
+.wrapper h1 {
+    color: #007bff;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.wrapper form {
+    margin: 40px 0 20px 0;
+}
+
+form :where(input, select, button) {
+    width: 100%;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+}
+
+form p {
+    color: #007bff;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+form select {
+    border: 2px solid #007bff;
+}
+
+form input {
+    height: 35px;
+    font-size: 15px;
+    padding: 0 15px;
+    border: 2px solid #007bff;
+}
+
+form input:focus {
+    padding: 0 14px;
+    border: 2px solid #007bff;
+}
+
+form .icon {
+    background-color: white;
+    width: 37px;
+    height: 37px;
+    border-radius: 50%;
+    margin-top: 40px;
+    border: 2px solid #007bff;
+}
+
+form .icon:hover {
+    background-color: #007bff;
+    border: 2px solid white;
+    color: #007bff;
+}
+
+form .drop-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+form button {
+    margin-top: 20px;
+    font-size: 20px !important;
+    font-weight: bold !important;
+    background-color: white !important;
+    color: #007bff !important;
+    border: 2px solid #007bff !important;
+}
+
+form button:hover {
+    color: white !important;
+    background-color: #007bff !important;
+    border: 2px solid white !important;
+}
+
+form .exchange-rate {
+    color: #007bff;
+    font-size: 25px;
+    font-weight: bold;
+    margin: 20px 0 5px;
+    text-align: center;
+}
+
+
+/* -- Footer -- */
+.footer-container {
+    color: white;
+    background-color: rgb(48, 47, 47);
+    text-align: center;
+}
+
+.social {
+    border-radius: 10px;
+    background-color: #007bff;
+    width: 75px;
+    display: inline-block;
+}
+
+.social-link {
+    color: white;
+    text-decoration: none;
+}

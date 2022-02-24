@@ -11,9 +11,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <CurrencyConverter 
-        currencyOptions={currencyOptions}
-      />
+      <CurrencyConverter/>
       <CurrencyRates />
       <Footer />
     </>

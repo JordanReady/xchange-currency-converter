@@ -2,6 +2,25 @@ body {
     background-color: rgb(66, 65, 65);
 }
 
+/* -- Nav bar -- */
+nav {
+    background-color: rgb(48, 47, 47);
+}
+
+nav a {
+    margin-left: 20px;
+}
+
+nav h3 {
+    color: white;
+}
+
+nav h3 span {
+    color: #007bff;
+    font-weight: bolder;
+    font-size: 38px;
+}
+
 /* -- Currency Converter -- */
 .wrapper {
     width: 370px;
@@ -56,9 +75,13 @@ form input:focus {
 }
 
 form .icon {
+    font-size: 21px !important;
+    letter-spacing: -3px;
+    padding-left: 2px;
+    padding-bottom: 2px;
     background-color: white;
-    width: 37px;
-    height: 37px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
     margin-top: 40px;
     border: 2px solid #007bff;

@@ -36,7 +36,8 @@ export default function CurrencyConverter(props) {
         setToCurrency(fromCurrency);
     }
 
-    const handleClick = () => {
+    const handleClick = (e) => {
+        e.preventDefault();
         const conversion = (fromCurrencyAmount * exchangeRate).toFixed(2);
         
         setToCurrencyAmount(conversion);

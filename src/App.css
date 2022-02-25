@@ -1,27 +1,42 @@
 body {
-    background-color: rgb(66, 65, 65);
+    background: linear-gradient(to top left, #0a8df0, #c4c3c3); 
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+    overflow-y: scroll; 
 }
+
+body::-webkit-scrollbar {
+    display: none; 
+  }
+ 
 
 /* -- Nav bar -- */
 nav {
-    background-color: rgb(48, 47, 47);
-    width: 100%;
+    background: linear-gradient(to top left, #0a8df0, #d42ba3);
+    width: auto;
+    min-width: 370px;
     position: sticky !important;
     top: 0;
 }
 
-nav a {
-    margin-left: 20px;
-}
-
 nav h3 {
-    color: white;
+    font-size: 40px;
+    letter-spacing: 3px;
+    background: -webkit-linear-gradient(#a641b5, #c4c3c3);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 nav h3 span {
-    color: #007bff;
+    font-size: 65px !important;
+    background: -webkit-linear-gradient(#0a8df0, #c4c3c3);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     font-weight: bolder;
-    font-size: 38px;
 }
 
 /* -- Currency Converter -- */
@@ -31,11 +46,11 @@ nav h3 span {
     border-radius: 15px;
     border: 2px solid #007bff;
     color: white;
-    background-color: rgb(48, 47, 47);
+    background: linear-gradient(to top left, #DE26A0, #068FF1); 
 }
 
 .wrapper h1 {
-    color: #007bff;
+    color: white;
     font-size: 30px;
     font-weight: bold;
     text-align: center;
@@ -53,7 +68,7 @@ form :where(input, select, button) {
 }
 
 form p {
-    color: #007bff;
+    color: white;
     font-size: 20px;
     font-weight: bold;
     margin-top: 20px;
@@ -128,7 +143,7 @@ form button:hover {
 }
 
 form .exchange-rate {
-    color: #007bff;
+    color: white;
     font-size: 25px;
     font-weight: bold;
     margin: 20px 0 5px;
@@ -137,44 +152,68 @@ form .exchange-rate {
 
 /* -- Currency Rates -- */
 
+.wrapper2 {
+    width: 370px;
+    padding: 30px;
+    border-radius: 15px;
+    border: 2px solid #007bff;
+    color: white;
+    background: linear-gradient(to bottom right, #DE26A0, #068FF1); 
+}
+
 .live-currency-rates {
     text-align: center !important;
 }
 
-.live-currency-rates h1{
-    color: #007bff;
+.live-currency-rates h1 {
+    font-size: 30px;
+    color: white;
     font-weight: bolder;
 }
 
+.live-currency-rates h5 {
+    display: inline-block;
+    margin-right: 10px;
+}
+
 .header {
-    color: #007bff;
+    color: white;
     font-size: 20px;
     font-weight: bolder;
 }
 
 .base-select {
-    color: #007bff;
+    color: #7758c7;
     font-weight: bold;
-    border: 2px solid #007bff;
+    border: 2px solid #7758c7;
     border-radius: 5px;
 }
 
 .currency-rate {
     color: white;
-    font-size: 20px;
+    font-size: 18px;
     text-decoration: dotted;
 }
 
 /* -- Footer -- */
 .footer-container {
     color: white;
-    background-color: rgb(48, 47, 47);
+    background: linear-gradient(to bottom right, #DE26A0, #068FF1); 
     text-align: center;
+    width: auto;
+    min-width: 370px;
 }
 
 .social {
     border-radius: 10px;
-    background-color: #007bff;
+    background: linear-gradient(135deg, hsla(197, 100%, 63%, 1) 0%, hsla(294, 100%, 55%, 1) 100%); 
+    width: 75px;
+    display: inline-block;
+}
+
+.social2 {
+    border-radius: 10px;
+    background: linear-gradient(135deg,hsla(294, 100%, 55%, 1) 0%, hsla(197, 100%, 63%, 1) 100%); 
     width: 75px;
     display: inline-block;
 }

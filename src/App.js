@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './App.css';
 import CurrencyConverter from './CurrencyConverter';
 import Navbar from './Navbar';
@@ -11,8 +11,11 @@ function App() {
   return (
     <>
       <Navbar />
-      <CurrencyConverter/>
-      <CurrencyRates />
+      <div className='row'>
+        <div className='col-12 col-md-6'><CurrencyConverter/></div>
+        <div className='col-12 col-md-6'><CurrencyRates /></div>
+      </div>
+      
       <Footer />
     </>
 

@@ -21,7 +21,7 @@ export default function CurrencyRates(props) {
     }, [])
 
     useEffect(() => {
-      if (baseCurrency != undefined) {
+      if (baseCurrency !== undefined) {
         fetch(`${BASE_URL}?from=${baseCurrency}`)
         .then(res => res.json())
         .then(data => {
@@ -32,9 +32,9 @@ export default function CurrencyRates(props) {
     }, [baseCurrency])
 
   return (
-    <div className='container live-currency-rates wrapper my-5'>
-        <h1>Live Currency Rates</h1>
-        <h5 className='header'>Base Currency</h5>
+    <div className='container live-currency-rates wrapper2 my-5'>
+        <h1>Currency Rates</h1>
+        <h5 className='header my-4'>Base Currency</h5>
         <select className='base-select' onChange={handleChange}>{currencyOptions.map(option => (
           <option key={option} value={option}>{option}</option>
         ))}</select>

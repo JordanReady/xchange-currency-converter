@@ -5,6 +5,9 @@ body {
 /* -- Nav bar -- */
 nav {
     background-color: rgb(48, 47, 47);
+    width: 100%;
+    position: sticky !important;
+    top: 0;
 }
 
 nav a {
@@ -59,11 +62,21 @@ form p {
 }
 
 form select {
+    color: #007bff;
+    font-weight: bold;
     border: 2px solid #007bff;
 }
 
+form .select-box {
+    height: 42px;
+}
+
 form input {
-    height: 35px;
+    text-align: center;
+    font-size: 25px !important;
+    font-weight: bolder;
+    color: #007bff;
+    height: 42px;
     font-size: 15px;
     padding: 0 15px;
     border: 2px solid #007bff;
@@ -122,6 +135,35 @@ form .exchange-rate {
     text-align: center;
 }
 
+/* -- Currency Rates -- */
+
+.live-currency-rates {
+    text-align: center !important;
+}
+
+.live-currency-rates h1{
+    color: #007bff;
+    font-weight: bolder;
+}
+
+.header {
+    color: #007bff;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.base-select {
+    color: #007bff;
+    font-weight: bold;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+}
+
+.currency-rate {
+    color: white;
+    font-size: 20px;
+    text-decoration: dotted;
+}
 
 /* -- Footer -- */
 .footer-container {

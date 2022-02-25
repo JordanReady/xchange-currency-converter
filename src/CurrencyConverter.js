@@ -20,7 +20,6 @@ export default function CurrencyConverter(props) {
           setFromCurrency(data.base)
           setToCurrency(firstCurrency)
           setExchangeRate(data.rates[firstCurrency]);
-          console.log(data.rates.BRL);
         })
       }, [])
 
@@ -38,8 +37,8 @@ export default function CurrencyConverter(props) {
     }
 
     const handleClick = () => {
-        console.log(fromCurrency);
-        const conversion = fromCurrencyAmount * exchangeRate;
+        const conversion = (fromCurrencyAmount * exchangeRate).toFixed(2);
+        
         setToCurrencyAmount(conversion);
     }
 
@@ -57,7 +56,7 @@ export default function CurrencyConverter(props) {
     }
 
   return (
-    <div className='container wrapper'>
+    <div className='container wrapper my-5'>
         <h1>Currency Converter</h1>
         <form action='#'>
             <div className='amount'>

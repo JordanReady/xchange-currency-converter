@@ -42,10 +42,7 @@ export default function CurrencyConverter(props) {
         const conversion = (fromCurrencyAmount * exchangeRate).toFixed(2);
         
         setToCurrencyAmount(conversion);
-        console.log(chartLabels);
-        console.log(chartLabel);
-        console.log(chartRate);
-        console.log(chartData);
+        chart();
     }
 
     const getAmount = (e) => {
@@ -72,7 +69,7 @@ export default function CurrencyConverter(props) {
 
 
     const chart = () => {
-        if(fromCurrency & toCurrency !== undefined) {
+        if(fromCurrency !== undefined && toCurrency !== undefined) {
             fetch(`https://altexchangerateapi.herokuapp.com/${startDate}..${endDate}?from=${fromCurrency}&to=${toCurrency}`)
             .then(res => res.json())
             .then(data => {

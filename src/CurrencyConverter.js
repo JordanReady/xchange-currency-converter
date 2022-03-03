@@ -43,7 +43,8 @@ export default function CurrencyConverter(props) {
         }
     }, [fromCurrency, toCurrency])
 
-    const handleSwitch = () => {
+    const handleSwitch = (e) => {
+        e.preventDefault();
         setFromCurrency(toCurrency);
         setToCurrency(fromCurrency);
     }
@@ -72,6 +73,8 @@ export default function CurrencyConverter(props) {
     // Chart.js
     
     let chart = undefined;
+    Chart.defaults.color = 'white';
+    Chart.defaults.plugins.legend.labels.boxWidth = 0;
 
     const getHistoricalRates = (base, quote) => {
         const endDate = new Date().toISOString().split('T')[0];
@@ -116,7 +119,8 @@ export default function CurrencyConverter(props) {
                 data,
                 fill: false,
                 tension: 0,
-                fontColor: 'white'
+                backgroundColor: 'white',
+                borderColor: 'hsla(0, 14%, 90%, 0.5)'
               }
             ]
           },

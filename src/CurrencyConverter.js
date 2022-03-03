@@ -64,12 +64,13 @@ export default function CurrencyConverter(props) {
     const [chartRate, setChartRate] = useState([]);
     const [chartLabel, setChartLabel] = useState([]);
     const [chartData, setChartData] = useState([]);
-    const endDate = new Date().toISOString().split('T')[0];
-    const startDate = new Date((new Date).getTime() - (30 * 24 * 60 * 60 * 1000)).toISOString().split('T')[0];
+    
 
 
     const chart = () => {
         if(fromCurrency !== undefined && toCurrency !== undefined) {
+            let endDate = new Date().toISOString().split('T')[0];
+            let startDate = new Date((new Date).getTime() - (30 * 24 * 60 * 60 * 1000)).toISOString().split('T')[0];
             fetch(`https://altexchangerateapi.herokuapp.com/${startDate}..${endDate}?from=${fromCurrency}&to=${toCurrency}`)
             .then(res => res.json())
             .then(data => {
@@ -117,13 +118,15 @@ export default function CurrencyConverter(props) {
         }
     }
 
+    const myChart = React.useRef();
     useEffect(() => {
         chart();
-        const ctx = document.getElementById('myChart').getContext('2d');
-        const myChart = new Chart(ctx, chartData);
+        const ctx = myChart.getContext('2d');
+        let myChart = new Chart(ctx, chartData);
         if (typeof myChart !== 'undefined') {
             myChart.destroy();
         }
+        console.log(myChart);
     }, [fromCurrency, toCurrency]);
 
 
@@ -161,7 +164,7 @@ export default function CurrencyConverter(props) {
             <button className='btn find-button' onClick={handleClick}>Find Exhange Rate</button>
             <div className='exchange-rate'> {fromCurrencyAmount} {fromCurrency} = {toCurrencyAmount} {toCurrency}</div>
         </form>
-        <canvas id='myChart' width={'310'} height={'310'} />
+        <canvas ref={node => myChart.current = node} width={'310'} height={'310'} />
     </div>
   )
 }

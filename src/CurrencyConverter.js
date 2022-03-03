@@ -116,11 +116,23 @@ export default function CurrencyConverter(props) {
                 data,
                 fill: false,
                 tension: 0,
+                fontColor: 'white'
               }
             ]
           },
           options: {
+            plugins: {
+                legend: {
+                  labels: {
+                    color: "white", 
+                    font: {
+                      size: 18 
+                    }
+                  }
+                }
+              },
             responsive: true,
+            
           }
         })
     }

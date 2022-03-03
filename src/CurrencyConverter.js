@@ -1,6 +1,15 @@
 import React, { useState, useEffect, } from 'react'
 import Chart from 'chart.js/auto';
 
+export const checkStatus = (response) => {
+  if (response.ok) {
+    // .ok returns true if response status is 200-299
+    return response;
+  }
+  throw new Error('Request was either a 404 or 500');
+}
+export const json = (response) => response.json()
+
 export default function CurrencyConverter(props) {
 
     const BASE_URL = 'https://altexchangerateapi.herokuapp.com/latest'
@@ -24,13 +33,15 @@ export default function CurrencyConverter(props) {
         })
       }, [])
 
-      useEffect(() => {
+    useEffect(() => {
         if (fromCurrency != null && toCurrency != null) {
             fetch(`${BASE_URL}?from=${fromCurrency}&to=${toCurrency}`)
                 .then(res => res.json())
                 .then(data => setExchangeRate(data.rates[toCurrency]))
+
+            getHistoricalRates(fromCurrency, toCurrency);
         }
-      }, [fromCurrency, toCurrency])
+    }, [fromCurrency, toCurrency])
 
     const handleSwitch = () => {
         setFromCurrency(toCurrency);
@@ -42,7 +53,6 @@ export default function CurrencyConverter(props) {
         const conversion = (fromCurrencyAmount * exchangeRate).toFixed(2);
         
         setToCurrencyAmount(conversion);
-        chart();
     }
 
     const getAmount = (e) => {
@@ -60,74 +70,60 @@ export default function CurrencyConverter(props) {
 
 
     // Chart.js
-    const [chartLabels, setChartLabels] = useState([]);
-    const [chartRate, setChartRate] = useState([]);
-    const [chartLabel, setChartLabel] = useState([]);
-    const [chartData, setChartData] = useState([]);
     
+    let chart = undefined;
 
+    const getHistoricalRates = (base, quote) => {
+        const endDate = new Date().toISOString().split('T')[0];
+        const startDate = new Date((new Date).getTime() - (30 * 24 * 60 * 60 * 1000)).toISOString().split('T')[0];
 
-    const chart = () => {
-        if(fromCurrency !== undefined && toCurrency !== undefined) {
-            let endDate = new Date().toISOString().split('T')[0];
-            let startDate = new Date((new Date).getTime() - (30 * 24 * 60 * 60 * 1000)).toISOString().split('T')[0];
-            fetch(`https://altexchangerateapi.herokuapp.com/${startDate}..${endDate}?from=${fromCurrency}&to=${toCurrency}`)
-            .then(res => res.json())
-            .then(data => {
-                setChartLabels([...Object.keys(data.rates)]);
-                setChartRate([...Object.values(data.rates).map(rate => rate[toCurrency])]);
-                setChartLabel(`${fromCurrency}/${toCurrency}`);
-                setChartData({
-                    type: 'line',
-                    data: {
-                        labels: chartLabels,
-                        datasets: [{
-                            label: chartLabel,
-                            data: chartRate,
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
-                })
-            })
-            .catch(err => {
-                console.log(err);
-              });
-        }
+        fetch(`https://altexchangerateapi.herokuapp.com/${startDate}..${endDate}?from=${base}&to=${quote}`)
+        .then(checkStatus)
+        .then(json)
+        .then(data => {
+            console.log(data)
+            if (data.error) {
+              throw new Error(data.error);
+            }
+
+            const chartLabels = Object.keys(data.rates);
+            const chartData = Object.values(data.rates).map(rate => rate[quote]);
+            const chartLabel = `${base}/${quote}`;
+            buildChart(chartLabels, chartData, chartLabel);
+        })
+        .catch(error => console.error(error.message));
     }
 
-    const myChart = React.useRef();
-    useEffect(() => {
-        chart();
-        const ctx = myChart.getContext('2d');
-        let myChart = new Chart(ctx, chartData);
-        if (typeof myChart !== 'undefined') {
-            myChart.destroy();
+    const buildChart = (labels, data, label) => {
+        console.log('build')
+        const chartRef = document.getElementById('myChart');
+
+        if (!chartRef) {
+            return
         }
-        console.log(myChart);
-    }, [fromCurrency, toCurrency]);
+
+        if (typeof chart !== "undefined") {
+          chart.destroy();
+        }
+
+        chart = new Chart(chartRef.getContext("2d"), {
+          type: 'line',
+          data: {
+            labels,
+            datasets: [
+              {
+                label: label,
+                data,
+                fill: false,
+                tension: 0,
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+          }
+        })
+    }
 
 
   return (
@@ -164,7 +160,7 @@ export default function CurrencyConverter(props) {
             <button className='btn find-button' onClick={handleClick}>Find Exhange Rate</button>
             <div className='exchange-rate'> {fromCurrencyAmount} {fromCurrency} = {toCurrencyAmount} {toCurrency}</div>
         </form>
-        <canvas ref={node => myChart.current = node} width={'310'} height={'310'} />
+        <canvas id='myChart' width={'310'} height={'310'} />
     </div>
   )
 }

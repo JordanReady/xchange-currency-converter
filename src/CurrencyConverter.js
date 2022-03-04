@@ -10,6 +10,8 @@ export const checkStatus = (response) => {
 }
 export const json = (response) => response.json()
 
+let chart = undefined;
+
 export default function CurrencyConverter(props) {
 
     const BASE_URL = 'https://altexchangerateapi.herokuapp.com/latest'
@@ -72,7 +74,6 @@ export default function CurrencyConverter(props) {
 
     // Chart.js
     
-    let chart = undefined;
     Chart.defaults.color = 'white';
     Chart.defaults.plugins.legend.labels.boxWidth = 0;
 
